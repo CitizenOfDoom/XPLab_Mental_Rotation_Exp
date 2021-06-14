@@ -23,14 +23,15 @@ const intro = magpieViews.view_generator("intro", {
   trials: 1,
   name: 'intro',
   // If you use JavaScripts Template String `I am a Template String`, you can use HTML <></> and javascript ${} inside
-  text: `This is a sample introduction view.
+  text: `Welcome to this Mental Rotation Experiment
             <br />
             <br />
-            The introduction view welcomes the participant and gives general information
-            about the experiment. You are in the <strong>${coin}</strong> group.
+            Thank you for participating in this practice experiment.
+            No Participants of the Experimental Psychology Lab were harmed during the creation and implementation of this experiment.
+            For further questions, please contact our lawyers.
             <br />
             <br />
-            This is a minimal experiment with one forced choice view. It can serve as a starting point for programming your own experiment.`,
+            This is no longer a minimal experiment, and features several key_press trials.`,
   buttonText: 'begin the experiment'
 });
 
@@ -39,11 +40,24 @@ const instructions = magpieViews.view_generator("instructions", {
   trials: 1,
   name: 'instructions',
   title: 'General Instructions',
-  text: `This is a sample instructions view.
+  text: `Here are your instructions:
             <br />
             <br />
-            Tell your participants what they are to do here.`,
+            For this experiment, you will be shown two pictures of figures from different angles
+            and will have to judge whether those are the same figure or not, as quickly as possible,
+            using the 'f' and 'j' keys on your keyboard. The experiment may take about 10 minutes.
+            Please make sure you are not interrupted.
+            <br />
+            There will be a brief practice run before the real experiment begins.`,
   buttonText: 'go to trials'
+});
+
+const middleman = magpieViews.view_generator("begin", {
+  trials: 1,
+  name: 'middleman',
+  title: 'Practice complete, now the real experiment starts!',
+  text: '  ',
+  prolificConfirmText: 'Press the button'
 });
 
 
@@ -114,6 +128,30 @@ const forced_choice_2A = magpieViews.view_generator("forced_choice", {
   //     after_response_enabled: check_response
   // }
 });
+
+const key_press_test = magpieViews.view_generator('key_press', {
+  trials: trial_info.key_press.length,
+  name:'key_press_test',
+  data: _.shuffle(trial_info.key_press),
+
+});
+
+const key_press_practice = magpieViews.view_generator('key_press', {
+  trials: practice_trials.key_press.length,
+  name:'key_press_practice',
+  data: _.shuffle(practice_trials.key_press),
+  pause: 250,
+
+});
+
+const key_press_main = magpieViews.view_generator('key_press', {
+  trials: main_trials.key_press.length,
+  name:'key_press_main',
+  data: _.shuffle(main_trials.key_press),
+  pause: 250,
+
+});
+
 
 // There are many more templates available:
 // forced_choice, slider_rating, dropdown_choice, testbox_input, rating_scale, image_selection, sentence_choice,

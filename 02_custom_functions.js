@@ -31,7 +31,7 @@ const generateID = function(len) {
 
 
 
-/* Hooks  
+/* Hooks
 *
 *
 */
@@ -51,16 +51,23 @@ const time_limit = function(data, next) {
 
 // compares the chosen answer to the value of `option1`
 check_response = function(data, next) {
+  console.log('im in');
     $('input[name=answer]').on('change', function(e) {
         if (e.target.value === data.correct) {
+          console.log('this is the if');
             alert('Your answer is correct! Yey!');
         } else {
+          console.log('this is the if wrong');
             alert('Sorry, this answer is incorrect :( The correct answer was ' + data.correct);
         }
+        console.log('end of the line');
         next();
     })
 }
 
+//call_timeout = function(data, next) {
+
+//}
 // Declare your hooks here
 
 
